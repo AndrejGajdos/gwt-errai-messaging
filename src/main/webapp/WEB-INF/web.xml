@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>gwt_errai_messaging.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>userServlet</servlet-name>
+    <servlet-class>gwt.user.server.UserServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>userServlet</servlet-name>
+    <url-pattern>/gwt_errai_messaging/userService</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+        <servlet-name>ErraiServlet</servlet-name>
+		<servlet-class>org.jboss.errai.bus.server.servlet.DefaultBlockingServlet</servlet-class>
+        <init-param>
+			<param-name>auto-discover-services</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErraiServlet</servlet-name>
+        <url-pattern>*.erraiBus</url-pattern>
+    </servlet-mapping>
+    
+    <context-param>
+	   <param-name>ErraiApp.properties</param-name>
+	   <param-value>WEB_INF/ErraiApp.properties</param-value>
+	</context-param>
+
+</web-app>
